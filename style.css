@@ -1,0 +1,207 @@
+
+table, th, td{
+    border:1vw solid white;
+border-collapse : collapse;
+
+}
+img{
+    width: 100%;
+}
+
+html, body{
+    height: 100%;
+    min-height: 100%;
+    width: auto;
+}
+#tatx{
+    font-size: 2vw;
+}
+
+#dp{
+    font-size: 1.5vw;
+}
+
+#c{background-color: rgb(200,221,248);
+    width:15vw;
+    font-size: 2vw;
+    text-align: center;
+}
+
+#cp{background-color: rgb(200,221,248);
+    width:20vw;
+    text-align: center;
+    
+}
+
+#c:hover{filter: brightness(80%)}
+a{
+    text-decoration: none;
+}
+
+#pimg{
+    width:20vw;
+}
+
+#pex{
+    width :80vw;
+    text-align: center;
+}
+#pend{
+    vertical-align : bottom;
+}
+#ts{
+    width :94vw;
+    font-size: 3vw;
+    background-color: white;
+    text-align: center;
+}
+#tsd{
+    width :94vw;
+    border: 0px solid;
+    text-align: center;
+}
+
+.btn{
+    padding: 0 0;
+}
+.taif{
+    border: 0px solid;
+    background-color: rgb(255, 219, 151);
+}
+.taif:hover{
+    filter: brightness(80%)
+}
+.tcif {
+    border: 0px solid white;
+    background-color: rgb(255, 219, 151);
+}
+.tcif:hover{
+    filter: brightness(80%)
+}
+.tsif {
+    border: 0px solid;
+    background-color: rgb(255, 219, 151);
+}
+.tsif:hover{
+    filter: brightness(80%)
+}
+#top{width: 80px;
+    right: 5%;
+    bottom: 5%;
+    position: fixed;}
+.my-div {
+    width : 150px;
+    height : 150px;
+    background-color : blue;
+  }
+#to{
+    width :158.3px;
+    border-top: solid rgb(205, 205, 205);
+    background-color: rgb(205, 205, 205);
+    border-bottom: solid rgb(205, 205, 205);
+    text-align: center;
+}
+
+#ovlo{
+    width: 10vw;
+    height: auto;
+}
+#ovna{
+    width: 20vw;
+    height: auto;
+}
+#psi{
+    width: 95%;
+}
+#log{
+    width: 100vw;
+    height: auto;
+    background-color:  rgb(0, 0, 0);
+}
+#log:hover{filter: brightness(150%)}
+
+#role{
+    width : 2vw;
+    font-size: 3vw;
+    background-color: black;
+    color: white;}
+
+#n{background-color: green;
+    color: white;
+    border: 0px solid;
+}
+#r{background-color: blue;
+    color: white;
+    border: 0px solid;}
+#s{background-color: purple;
+    color: white;
+    border: 0px solid;}
+#p{background-color: orange;
+        color: white;
+    border: 0px solid;}
+#pa{
+    width: 8vw;
+    background-color: rgb(205, 205, 205);
+}
+
+#cname{
+    font-size: 3vw;
+    font-weight: bold;
+    width :80vw;
+    text-align: center;
+    border-left: solid rgb(205, 205, 205);
+    background-color: rgb(205, 205, 205);
+}
+.nm{
+    height: 1vw;
+    width :40%;
+    font-size: 125%;
+    font-weight: bold;
+    text-align: center;
+}
+.ep{
+    width : 25%;
+    height: 10px;
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+#tp{
+    width : 15%;
+    height: 10px;
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+#mo{
+    border-collapse : collapse;
+    background-color: rgb(205, 205, 205);
+    border: 0px solid;
+}
+.pt{
+    border-collapse : collapse;
+    color: black;
+    background-color: yellow;
+    border: 0px solid;
+}
+.wt{
+    border-collapse : collapse;
+    color: white;
+    background-color: red;
+    border: 0px solid;
+}
+.tt{
+    border-collapse : collapse;
+    color: white;
+    background-color: purple;
+    border: 0px solid;
+}
+.st{
+    border-collapse : collapse;
+    color:black;
+    background-color: rgb(233, 233, 233);
+    border: 0px solid;
+}
+
+
+
