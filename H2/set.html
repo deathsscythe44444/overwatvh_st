@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>메르시</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '고요' , 0 , ['[연민의 치유]치유량이 20% 증가하고. 생명력이 가득 찬 아군을 치유 중일 때도 자신을 치유합니다.'] , 128 , 256);
+            padd('p' , 0 , 2 , '꽉 채운 잔' , 0 , ['생명력이 가득 찬 아군을 대상으로 지정하는 경우, [카두세우스 지팡이] 치유량이 추가 생명력으로 전환됩니다.(최대 50)'] , 1 , 256);
+            padd('p' , 0 , 3 , '보호 광선' , 0 , ['생명력이 80%보다 높은 [카두세우스 지팡이] 대상이 10%의 피해 감소 효과를 얻습니다.'] , 1+2 , 4096);
+            padd('p' , 0 , 4 , '왜곡' , 0 , ['[카두세우스 지팡이]로 증폭된 아군이 20%의 생명력 흡수를 얻습니다.'] , 1+2 , 512+1024);
+            padd('p' , 0 , 5 , '운명의 실' , 0 , ['[카두세우스 지팡이]가 3초 동안 50% 증가한 효율로 이전 대상에게 연결됩니다.'] , 1+2 , 4096);
+            padd('p' , 0 , 6 , '전투 의무관' , 0 , ['[지팡이]가 연결되고 1초가 지날 때 마다, 재장전하거나 지팡이로 교체할 때 까지 [카두세우스 블라스터] 공격 속도가 4% 증가합니다.(10회 중첩)'] , 1+2 , 16);
+            padd('p' , 0 , 7 , '긴급 구조원' , 0 , ['아군을 [부활]시키면 자신과 아군 모두 6초 동안 250(기술위력)의 추가 생명력을 얻습니다.'] , 32 , 256);
+            padd('p' , 0 , 8 , '등가 교환' , 0 , ['[부활]의 시전 시간이 33% 감소하고 3회 충전할 수 있지만, 재사용 대기 시간이 라운드 시작 시에만 초기화 됩니다.'] , 32 , 4096);
+            padd('p' , 0 , 9 , '르네상스' , 0 , ['성공적으로 [부활]을 사용하면 5초동안 [발키리]를 활성화 합니다.'] , 32+64 , 4096);
+            padd('p' , 0 , 10 , '부상자 분류소' , 0 , ['생명력이 50% 미만인 아군에게 [수호천사]를 사용하면, [카두세우스 지팡이]가 해당 아군의 생명력을 3초 동안 30% 추가로 치유합니다.'] , 16+1 , 256);
+            padd('p' , 0 , 11 , '아이구 그랬어요' , 0 , ['[수호천사]가 끝나면 이동한 거리 1미터당 대상 생명력을 4(기술위력)씩 치유합니다.'] , 16 , 256);
+            padd('p' , 0 , 12 , '어스름한 원' , 0 , ['[발키리]가 활성화되어 있을 때, [카두세우스 지팡이]의 치유 및 피해 증폭이 근처 아군에게 자동으로 적용됩니다.'] , 64+1+2 , 4096);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+            
+            padd('w' , 'r' , 8 , '공중 기동기' , 4000 , ['공중에 떠 있을 때 다음을 얻습니다.',' 무기 공격력 +5%', '공격 속도 +10%'] , 128 , 1+16);
+
+            padd('w' , 's' , 12 , '천상의 탄창' , 10000 , ['무기 공격력 +10%', '최대 탄약 +33%', '[카두세우스 블라스터]가 10% 확률로 탄약을 소모하지 않고 1회 추가 발사합니다.'] , 1 , 1+2048);
+            padd('w' , 's' , 13 , '카두세우스 연장기' , 10000 , ['무기 공격력 +10%', '[카두세우스 지팡이] 사거리 +33%'] , 1+2 , 1+4096);
+
+            padd('t' , 'r' , 8 , '장거리 날개' , 4000 , ['기술 위력 +10%', '수호천사 사거리 +33%'] , 16 , 2+4096);
+
+            padd('t' , 's' , 11 , '부활 거리 측정기' , 10000 , ['재사용 대기시간 감소 +10%', '[부활] 사거리 75%'] , 32 , 64+4096);
+            padd('t' , 's' , 12 , '천사의 곡예' , 10000 , ['[수호천사] 이동 속도 + 15%', '[수호천사]의 재사용 대기시간이 점프하거나 웅크리는 즉시 시작됩니다.'] , 16 , 32+4096);
+            
+            padd('s' , 'r' , 9 , '공기역학적 깃털' , 4000 , ['생명력 +25', '[천사 강림]의 효과를 받는 동안 1초마다 이동 속도가 10%씩 계속 증가합니다(최대 60%).'] , 16 , 256+32);
+            padd('s' , 'r' , 10 , '천사의 레저 복장' , 4000 , ['생명력 +25', '[천사 강림] 또는 [수호천사]의 영향을 받고 있을 때 1초마다 생명력의 3%만큼 치유합니다.'] , 16+128 , 256);
+
+            padd('s' , 's' , 11 , '축복받은 부스터' , 9000 , ['생명력 +50', '웅크리기나 점프로 [수호천사]를 취소하면 추진 속도가 25% 증가합니다.'] , 16 , 256+32);
+            padd('s' , 's' , 12 , '연쇄 유발기' , 10000 , ['방어력 +50','[카두세우스 지팡이] 공격력 증폭 +5%', '공격력 증폭을 통한 궁극기 충전 +15%'] , 2 , 256+4096);
+
+            tlc(1);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="4"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 메르시 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+
+            <tr><td id="pa"><img id="pa" src="./img/Cp1.png"></td>
+                <td>
+                    <pre id="dp">
+매우 천천히 낙하합니다.(낙하 속도: 2m/s)
+                    </pre>
+                </td></tr>
+            <tr><td id="pa"><img id="pa" src="./img/Cp2.png"></td>
+                <td>
+                    <pre id="dp">
+카두세우스 지팡이로 아군을 치유하면 자신 또한 치유합니다.
+(치유량의 40%)
+                    </pre>
+                </td></tr>
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>

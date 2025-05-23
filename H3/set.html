@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>모이라</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '그대에게 힘을' , 0 , ['[생체 손아귀]의 보조 발사가 아군을 대상으로 할 수 있으며, 아군 피해를 15% 증가시킵니다.'] , 2 , 4096);
+            padd('p' , 0 , 2 , '불안정한 위력' , 0 , ['[생체 손아귀]로 치유한 아군을 5초에 걸쳐 [생체 손아귀] 치유량의 25%만큼 추가로 치유합니다.'] , 1 , 256);
+            padd('p' , 0 , 3 , '사슬 손아귀' , 0 , ['[생체 구슬] 사용 후, [생체 손아귀]의 보조 발사가 10미터 이내에 있는 2명의 추가 대상에게 3초 동안 연쇄됩니다.'] , 2+32 , 4096);
+            padd('p' , 0 , 4 , '천상의 절개' , 0 , ['[생체 손아귀] 보조 발사로 적의 머리를 조준하는 동안 이동 속도가 30% 증가하고, 30%의 생명력 흡수를 얻으며, 생체 에너지를 100% 더 회복합니다.'] , 2 , 32+512+4096);
+            padd('p' , 0 , 5 , '최적의 오버플로' , 0 , ['[생체 에너지]를 50 소모하면 마지막으로 선택한 [생체 구슬]을 발사합니다. 이 [생체 구슬]의 지속 시간은 75% 감소합니다.'] , 1+32 , 4096);
+            padd('p' , 0 , 6 , '해체' , 0 , ['50의 [생체 에너지]를 소모하면 6초 동안 피해가 20% 증가합니다.'] , 1 , 4096);
+            padd('p' , 0 , 7 , '다중 구슬' , 0 , ['[생체 구슬] 사용 시, 선택한 유형의 효율이 85% 감소한 구슬을 2개 추가로 날립니다.'] , 32 , 4096);
+            padd('p' , 0 , 8 , '십자구' , 0 , ['[생체 구슬] 사용 시, 유형이 다르고 용량이 50% 감소한 추가 [생체 구슬] 하나를 발사합니다.'] , 32 , 4096);
+            padd('p' , 0 , 9 , '환영' , 0 , ['[소멸] 사용 시, 마지막으로 선택하고 지속 시간이 50% 감소한 [생체 구슬]의 움직이지 않는 고정 복제본을 생성합니다.'] , 16+32 , 4096);
+            padd('p' , 0 , 10 , '공허 이동가' , 0 , ['[소멸]이 8미터 내에 있는 아군의 위상 또한 0.25초 동안 바꾸며, 내 최대 생명력의 20%에 해당하는 추가 생명력도 부여합니다.'] , 16 , 256+4096);
+            padd('p' , 0 , 11 , '과학적인 사망 방법' , 0 , ['[소멸] 사용 중 적을 통과하면, 5%의 궁극기 충전과 최대 생명력의 15%에 해당하는 추가 생명력을 얻습니다.'] , 16 , 256+4096);
+            padd('p' , 0 , 12 , '파괴의 분할' , 0 , ['[융화] 지속 시간 +25%, [융화]를 순수 치유와 순수 공격 간 전환할 수 있습니다. 효과가 30% 증가합니다.'] , 64 , 4096);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+            padd('w' , 'r' , 8 , '고용량 튜빙' , 4000 , ['무기 공격력 +10%', '최대 [생체 에너지] +50'] , 1 , 1+4096);
+            padd('w' , 'r' , 9 , '생체 바늘' , 4000 , ['공격 속도 +10%', '[생체 손아귀] 보조 발사 시 [생체 에너지]를 50%만큼 추가로 회복합니다.'] , 2 , 16+4096);
+
+            padd('w' , 's' , 12 , '대체 에너지' , 10000 , ['기술 위력 +10%', '공격 속도 +15%', '[소멸]을 사용하면 [생체 에너지]를 보충합니다.'] , 16 , 2+16+4096);
+            padd('w' , 's' , 13 , '아원자 분열기' , 11000 , ['무기 공격력 +10%', '[생체 손아귀] 보조 발사 사거리 + 15%'] , 2 , 1+4096);
+            
+            padd('t' , 'r' , 8 , '스마트 구슬' , 4000 , ['기술 위력 +5%', '[생체 구슬]이 대상을 치유하거나 피해를 주는 중에는 50% 느리게 움직입니다.'] , 32 , 2+4096);
+            padd('t' , 'r' , 9 , '공중부양 숄' , 4500 , ['기술 위력 +10%', '[융화] 사용 중 자유롭게 비행할 수 있습니다.'] , 64 , 2+4096);
+            
+            padd('t' , 's' , 11 , '융화 군단' , 10000 , ['생명력 +25', '기술 위력 +15%', '[융화]로 치유된 아군이 15% 증가한 피해를 줍니다.'] , 64 , 256+2+4096);
+            padd('t' , 's' , 12 , '늘어난 덩굴손' , 11000 , ['기술 위력 +15%', '[생체 구슬] 촉수 사거리 + 30%'] , 32 , 2+4096);
+
+            padd('s' , 'r' , 9 , '심연 부츠' , 4000 , ['생명력 +25', '[소멸] 사용 중 30% 더 높게 점프할 수 있습니다.'] , 16 , 256+4096);
+
+            tlc(2);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="3"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 모이라 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>
