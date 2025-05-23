@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>리퍼</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '공유 흡수' , 0 , ['[영혼 수확]이 10m 내에 있는 가장 가까운 아군 또한 리퍼가 준 피해의 30%만큼 치유합니다.'] , 128 , 256);
+            padd('p' , 0 , 2 , '기습자' , 0 , ['기술 사용 후, 다음에 적을 뒤에서 사격하면 3초에 걸쳐 50%의 피해를 줍니다.'] , 16+32+64 , 4096);
+            padd('p' , 0 , 3 , '살육의 혼' , 0 , ['처치 시 재사용 대기시간이 초기화됩니다.'] , 128 , 64);
+            padd('p' , 0 , 4 , '수확제' , 0 , ['[헬파이어 샷건] 적중 시 10% 확률로 영혼 구슬 하나를 생성합니다.','구슬을 주우면 생명력을 25% 회복하고, 탄약을 25% 얻으며, 3초 동안 이동 속도가 25% 증가합니다.'] , 1 , 32+256+2048);
+            padd('p' , 0 , 5 , '장막의 유산탄' , 0 , ['[망령화]를 사용하면 다음 탄창의 한 발당 산탄 개수가 25% 증가하고, 산탄 범위가 50% 증가합니다.'] , 1+16 , 4096);
+            padd('p' , 0 , 6 , '회전식 파멸' , 0 , ['근거리(7m)에서 [헬파이어 샷건]을 명중시키면 1초 동안 공격 속도가 5% 증가합니다. (최대 8회 중첩)'] , 1 , 16);
+            padd('p' , 0 , 7 , '흡혈의 손길' , 0 , ['[빠른 근접 공격] 시 5초 동안 적에게 징표를 남깁니다. 아군이 징표가 찍힌 적에 대해 20%의 생명력 흡수를 얻습니다.'] , 128 , 512+1024);
+            padd('p' , 0 , 8 , '무덤처럼 조용히' , 0 , ['발걸음과 [그림자 밟기] 소리가 크게 줄어듭니다.'] , 32+128 , 4096);
+            padd('p' , 0 , 9 , '조르는 걸음' , 0 , ['[그림자 밟기] 사용 후 3초 동안 생명력 흡수량이 두 배가 됩니다.'] , 32+128 , 512+1024);
+            padd('p' , 0 , 10 , '죽음의 걸음' , 0 , ['[그림자 밟기] 사용 후, 1.5초 동안 피해가 50% 감소한 [죽음의 꽃]을 시전합니다.'] , 32+64 , 4096);
+            padd('p' , 0 , 11 , '망령 갱신' , 0 , ['[망령화] 상태에서 1초마다 생명력을 10%씩 회복합니다. 생명력이 50% 미만일 경우 두 배로 회복합니다.'] , 16 , 256);
+            padd('p' , 0 , 12 , '유령의 추적' , 0 , ['[망령화] 상태에서 적을 통과하면 적의 이동 속도와 공격 속도가 3초 동안 30% 감소합니다.'] , 16 , 4096);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+            padd('w' , 'r' , 8 , '망령 산탄' , 4000 , ['공격 속도 +5%', '최대 탄약 +25%', '[그림자 밟기] 사용 시 탄약을 100% 회복합니다.'] , 32 , 16+2048);
+            
+            padd('w' , 's' , 12 , '맹공' , 10000 , ['최대 탄약 +25%', '3번째 사격할 때마다 양손의 [헬파이어 샷건]을 모두 발사합니다. 추가 사격 시 탄환을 소모하지 않지만 피해가 80% 감소합니다.'] , 1 , 2048+4096);
+            
+            padd('t' , 's' , 11 , '밤의 엄습자' , 9500 , ['이동 속도 +10%', '[그림자 밟기] 시전 속도 +30%', '[망령화] 사용 시 [그림자 밟기]의 재사용 대기시간이 2초 감소합니다.'] , 16+32 , 32+64+4096);
+            padd('t' , 's' , 12 , '파괴의 화환' , 10000 , ['기술 위력 +20%', '[죽음의 꽃] 반경 +25%', '[죽음의 꽃] 도중 이동 속도 +20%'] , 64 , 2+32+4096);
+            padd('t' , 's' , 13 , '군중 제어' , 11000 , ['기술 위력 +15%', '[죽음의 꽃]이 사거리 내에 있는 적 하나당 5%의 기술 위력을 얻습니다.'] , 64 , 2);
+            
+            padd('s' , 'r' , 9 , '영구 결빙 방지' , 4000 , ['생명력 +25', '무기 공격력 5%', '적 감속 효과 효율이 50% 감소합니다.'] , 256 , 1+256+4096);
+            padd('s' , 'r' , 10 , '주머니 안개' , 4000 , ['생명력 +25', '생명력이 50% 미만일 때 이동 속도가 20% 증가합니다.'] , 128 , 256+32);
+            padd('s' , 'r' , 11 , '파멸' , 4000 , ['기술 생명력 흡수 +15%', '[죽음의 꽃]으로 처치할 때마다 라운드가 종료될 때까지 생명력이 25만큼, 최대 100까지 증가합니다.'] , 64 , 256+1024);
+            
+            padd('s' , 's' , 11 , '끔찍한 날개' , 10000 , ['생명력 +25', '[망령화] 상태일 때 비행할 수 있게 되며 이동 속도가 20% 증가합니다.'] , 16 , 32+256);
+            padd('s' , 's' , 12 , '담대한 바람' , 10000 , ['생명력 +50', '[망령화] 도중 이동 속도 +15%', '[망령화] 지속 시간 +33%'] , 16 , 32+256+4096);
+            padd('s' , 's' , 13 , '진홍빛 망토' , 11000 , ['생명력 +25', '기술 위력 +10%', '[죽음의 꽃] 사용 시 최대 생명력의 15%에 해당하는 추가 생명력을 얻습니다.'] , 64 , 256+2);
+            tlc(0);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="3"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 리퍼 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+<pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+
+            <tr><td id="pa"><img id="pa" src="./img/Cp.png"></td>
+                <td>
+                    <pre id="dp">
+피해를 주면 생명력을 회복합니다.(피해량의 30%)
+                    </pre>
+                </td></tr>
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>
