@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>자리야</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '관통 광선' , 0 , ['80 [에너지]를 초과할 경우, [입자포]의 기본 발사가 적을 관통합니다.'] , 1 , 4096);
+            padd('p' , 0 , 2 , '입자 가속기' , 0 , ['[입자포] 보조 발사 공격 속도가 15% 증가합니다. 기술 사용 후, 이 증가량이 5초 동안 4배로 증가합니다.'] , 4+16+32+64 , 16);
+            padd('p' , 0 , 3 , '한계 없음' , 0 , ['최대 [에너지]가 150으로 증가합니다. [에너지]가 100을 초과할 때마다 150% 빠른 속도로 감소하기 시작합니다.'] , 128 , 4096);
+            padd('p' , 0 , 4 , '예비 운동' , 0 , ['무기 생명력 흡수를 얻고 [에너지]의 15%만큼을 생명력으로 흡수합니다.'] , 128 , 512);
+            padd('p' , 0 , 5 , '격납 보호막' , 0 , ['[방벽]이 활성화된 동안 생명력을 25(기술 위력)치유하고, [에너지]에 따라 치유량이 증가하며, 이동 속도 또한 20% 증가합니다.'] , 16+32+128 , 32+256);
+            padd('p' , 0 , 6 , '너 찾으러 왔단다' , 0 , ['[방벽 씌우기] 사용 시 대상 아군 위치로 이동하며, 3초에 걸쳐 자신을 최대 생명력의 20%만큼 치유합니다.'] , 32 , 256+4096);
+            padd('p' , 0 , 7 , '보호막 혜택' , 0 , ['[방벽]이 끝나면 3초 동안 남은 [방벽] 내구도의 50%에 해당하는 추가 생명력을 대상에게 부여합니다.'] , 16+32 , 256);
+            padd('p' , 0 , 8 , '볼스카야 소용돌이' , 0 , ['[방벽] 시전 후 [입자포]의 다음 보조 발사 사용 시, 적을 감속시키고 2초에 걸쳐 100(기술위력)의 피해를 주는 소용돌이를 생성합니다.'] , 2+16+32 , 4096);
+            padd('p' , 0 , 9 , '분열장' , 0 , ['[방벽 씌우기]를 10미터 이내의 아군 1명에게도 추가로 적용하지만, 지속 시간이 20% 감소합니다.'] , 32 , 4096);
+            padd('p' , 0 , 10 , '생명의 리프팅' , 0 , ['+50% [입자 방벽] 크기.','[입자 방벽] 내구도가 추가 최대 생명력의 25%만큼 증가합니다.'] , 16 , 4096);
+            padd('p' , 0 , 11 , '엄청난 몸 풀기' , 0 , ['[방벽]이 1초마다 5미터 이내의 적을 밀쳐내고 25(기술위력)의 피해를 줍니다. 피해는 [에너지]에 따라 증가합니다.'] , 16+32+128 , 4096);
+            padd('p' , 0 , 12 , '중력자탄 변칙' , 0 , ['25% 궁극기 비용 감소','[중력자탄] 기본 피해가 30으로 증가합니다. 이 피해는 [에너지]에 따라 증가합니다. 대신 지속 시간이 50% 감소합니다.'] , 64+128 , 4096);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+            padd('w' , 'r' , 8 , '복합 배터리' , 4000 , ['무기 공격력 +5%', '[에너지]가 20 아래로 떨어지지 않습니다.'] , 128 , 1+4096);
+
+            padd('w' , 's' , 12 , '빛 발사기' , 10000 , ['무기 공격력 +15%','[입자포]를 연속으로 보조 발사하면 현재 탄창의 약 20% 덜 소모합니다(최대 60%).'] , 2 , 1+2048);
+            padd('w' , 's' , 13 , '더 큰 광선' , 11000 , ['무기 공격력 +10%', '[입자포]의 기본 발사 사거리가 20% 증가합니다.'] , 1 , 1+4096);
+            
+            padd('t' , 'r' , 8 , '방벽을 넘어서' , 4000 , ['기술 위력 +10%', '[방벽 씌우기] 사거리 +20%'] , 32 , 2+4096);
+
+            padd('t' , 's' , 11 , '링크스의 데이터 드라이브' , 10000 , ['생명력 +25', '기술 위력 +15%', '아군에게 [방벽 씌우기]를 시전하면 [방벽] 재사용 대기시간을 20% 돌려받습니다.'] , 32 , 2+64+256);
+            padd('t' , 's' , 12 , '초전도체' , 10000 , ['생명력 +25', '기술 위력 +15%', '[방벽] 지속 시간 +40%'] , 16+32 , 2+256+4096);
+
+            padd('s' , 'r' , 9 , '방폭 부츠' , 4000 , ['생명력 +25', '이동 속도 +5%', '[입자포]의 보조 발사가 자신을 밀쳐내는 효과가 100% 증가하고 자신에게 피해를 주지 않습니다.'] , 2 , 32+256+4096);
+            padd('s' , 'r' , 10 , '단백질 셰이크' , 4000 , ['생명력 +25', '근접 공격력 +15%', '[입자 방벽]이 활성화되어 있는 동안 저지 불가 상태가 되며, [빠른 근접 공격]이 적을 밀쳐냅니다.'] , 16 , 4+256+4096);
+            padd('s' , 'r' , 11 , '점퍼 케이블' , 4000 , ['보호막 +25', '기술 위력 +5%', '[방벽] 사용 후 즉시 보호막 재생을 시작합니다.'] , 16 , 2+256+4096);
+
+            tlc(2);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="3"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 자리야 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="allimg" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="allimg" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="allimg" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+
+            <tr><td id="pa"><img id="pa" src="./img/Cp.png"></td>
+                <td>
+                    <pre id="dp">
+[방벽]으로 막은 피해만큼 [입자포]의 공격력이 증가합니다.
+[에너지] 충전량: [방벽]으로 막은 피해 5당 1(방벽 하나당 최대 45, 최대 누적 100)
+[에너지] 감소량: [에너지] 충전 2초 후, 초당 2.5
+                    </pre>
+                </td></tr>
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>
