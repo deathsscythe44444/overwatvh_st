@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>애쉬</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '내 말 듣든가, 꺼지든가' , 0 , ['불타는 적에게 [바이퍼]로 피해를 주면 기술의 재사용 대기시간이 10% 감소합니다.'] , 1+2 , 64);
+            padd('p' , 0 , 2 , '우두머리' , 0 , ['비조준 사격이 적중할 때마다 다음 조준사격 적중 피해가 5%씩 증가합니다. (최대 30%)','재장전 시 초기화됩니다.'] , 1+2 , 4096);
+            padd('p' , 0 , 3 , '재장전 테라피' , 0 , ['재장전하면 생명력을 3% 치유합니다.'] , 128 , 256);
+            padd('p' , 0 , 4 , '화염탄' , 0 , ['조준 중 같은 대상을 빗나가지 않고 적중하면 30(무기공격력)의 추가 피해를 줍니다.'] , 2 , 4096);
+            padd('p' , 0 , 5 , '이중 총열' , 0 , ['[충격 샷건] 충전 횟수가 1 증가합니다.'] , 16 , 4096);
+            padd('p' , 0 , 6 , '재앙' , 0 , ['[충격 샷건] 사용 시 탄약을 2발 재장전합니다. [바이퍼]의 다음 적중 2회가 3초에 걸쳐 40(기술위력)의 추가 피해를 줍니다.'] , 16+1+2 , 2048+4096);
+            padd('p' , 0 , 7 , '화염 폭발' , 0 , ['[충격 샷건]이 적을 불태워 5초에 걸쳐 100(기술위력)의 피해를 줍니다. 대상이 이미 불타고 있었다면 즉시 75(기술위력)의 추가 피해를 줍니다.'] , 16 , 4096);
+            padd('p' , 0 , 8 , '이른 폭발' , 0 , ['[다이너마이트]를 맞히면 탄약이 5발 재장전되고 [다이너마이트]의 재사용 대기시간이 3초 감소합니다.'] , 32 , 2048+64);
+            padd('p' , 0 , 9 , '초고열 탄약' , 0 , ['[다이너마이트]가 땅에서 폭발하면 1초마다 적을 불태워 50(기술위력)의 피해를 주는 용암을 남깁니다.'] , 32 , 4096);
+            padd('p' , 0 , 10 , '화려하게 펑' , 0 , ['[다이너마이트]가 폭발하면 66% 감소한 피해를 주는 점착 폭발물 3개를 생성합니다.'] , 32 , 4096);
+            padd('p' , 0 , 11 , 'B.O.B. 주니어' , 0 , ['[B.O.B.] 궁극기 충전 비용이 50% 감소하지만 B.0.B.의 생명력이 감소하며, 공격 속도 또한 20% 감소하고, 크기가 아주 작아집니다.'] , 64 , 4096);
+            padd('p' , 0 , 12 , '공범' , 0 , ['[B.O.B.]이 준 피해의 100%만큼 치유되며, 내가 준 피해의 100%만큼 [B.O.B.]이 치유됩니다.'] , 64 , 256);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+            padd('w' , 'r' , 8 , '삼각대' , 4000 , ['무기 공격력 +5%', '아래에 있는 적에게 주는 [바이퍼], [충격 샷건], [다이너마이트] 피해가 10% 증가합니다.'] , 1+2+16+32 , 1+4096);
+            padd('w' , 'r' , 9 , '최대 탄창' , 4000 , ['공격 속도 +5%', '남은 탄약이 최대 탄약의 50%보다 많다면, 탄약 한 발당 공격 속도가 3% 증가합니다.'] , 128 , 16);
+            padd('w' , 'r' , 10 , '장전기 기름칠' , 5000 , ['재장전 속도 +15%, 최대 탄약 +25%'] , 256 , 128+2048);
+            
+            padd('w' , 's' , 12 , '기계식 조준기' , 11000 , ['공격 속도 +10%', '대상이 10m보다 멀리 있으면 조준 사격 피해가 m당 1% 증가합니다.'] , 2 , 16+4096);
+            padd('w' , 's' , 13 , '사이드와인더' , 11000 , ['공격 속도 +10%', '대상이 10m 이내에 있으면 조준하지 않은 사격 피해가 15% 증가합니다.'] , 1 , 16+4096);
+            
+            padd('t' , 'r' , 8 , '용광로 연료' , 4000 , ['생명력 +25', '기술 위력 +5%', '불태우기 효과를 정화하면 궁극기 충전을 3% 얻습니다.'] , 128 , 256+2+4096);
+            padd('t' , 'r' , 9 , '은제 라이터' , 4000 , ['기술 위력 +10%', '불타는 대상에게 주는 피해가 20%의 추가 궁극기 충전을 제공합니다.'] , 128 , 2+4096);
+            
+            padd('t' , 's' , 11 , '겹겹이 쌓은 막대' , 10000 , ['기술 위력 +15%', '[다이너마이트] 폭발 범위 +40%'] , 32 , 2+4096);
+            padd('t' , 's' , 12 , '적외선 렌즈' , 10000 , ['기술 위력 +15%', '불타는 적에게 주는 피해가 20% 증가합니다.'] , 128 , 2+4096);
+            padd('t' , 's' , 13 , '수제 폭발 산탄' , 10000 , ['재사용 대기시간 감소 +10%', '[충격 샷건]의 자신 밀쳐내기 효과가 50% 증가합니다.'] , 16 , 64+4096);
+
+            padd('s' , 'r' , 9 , '은빛 박차' , 4000 , ['생명력 +25', '[충격 샷건] 사용 후, 이동 속도가 3초 동안 20% 증가합니다.'] , 16 , 256+32);
+            
+            padd('s' , 's' , 11 , 'B.O.B. 배선 방어' , 10000 , ['생명력 +50', '방어력 +25', '[B.O.B.]이 돌진을 마치면 [B.O.B.]의 방어력이 300 증가합니다.'] , 64 , 256+4096);
+            padd('s' , 's' , 12 , '방화광' , 10000 , ['생명력 +50', '불태우기 효과가 35%의 생명력 흡수를 얻습니다.'] , 128 , 256+4096);
+
+            tlc(2);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="3"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 애쉬 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+<pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+
+            
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>

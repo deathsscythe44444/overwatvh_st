@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>캐서디</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '과녁' , 0 , ['치명타 적중 시 [구르기] 재사용 대기시간이 2초 감소합니다.'] , 16 , 64);
+            padd('p' , 0 , 2 , '망자가 걷는다' , 0 , ['최근 치명타를 적중한 적을 처치하면 그 라운드에서 최대 탄약이 1 증가합니다.'] , 128 , 2048);
+            padd('p' , 0 , 3 , '반응 속도' , 0 , ['[구르기] 사용 후 재사용 대기시간 중 [피스키퍼]의 다음 기본 발사가 9미터 이내의 적을 자동 조준합니다.'] , 16+1 , 4096);
+            padd('p' , 0 , 4 , '섬광처럼 빠른 판단' , 0 , ['[구르기]를 시작하면 뒤에 [섬광탄]을 하나 남깁니다.'] , 16+32 , 4096);
+            padd('p' , 0 , 5 , '풀 하우스' , 0 , ['발사할 수 있는 탄약 한 발당 [피스키퍼]의 기본 발사 피해가 1% 증가합니다(최대 25%).'] , 1 , 4096);
+            padd('p' , 0 , 6 , '그냥 굴러 버려' , 0 , ['[구르기] 사용 중 모든 피해를 막습니다. [구르기]가 끝나면 3초에 걸쳐 생명력의 30%만큼 치유합니다.'] , 16 , 256);
+            padd('p' , 0 , 7 , '연속 횡전' , 0 , ['[구르기] 거리가 50% 증가하고 적에게 65(기술위력)의 피해를 줍니다.'] , 16 , 4096);
+            padd('p' , 0 , 8 , '뜨거운 감자' , 0 , ['[섬광탄] 적중 시 3발의 추가 탄약을 제공합니다. 이 효과는 [피스키퍼]를 재장전하기 전까지 유지됩니다.'] , 32 , 2048);
+            padd('p' , 0 , 9 , '헛방' , 0 , ['최근 [섬광탄]으로 피해를 준 적을 처치하면 궁극기 충전을 15% 얻습니다.'] , 32 , 4096);
+            padd('p' , 0 , 10 , '석양' , 0 , ['[황야의 무법자]로 처치할 때마다 궁극기 충전을 15% 얻습니다.'] , 64 , 4096);
+            padd('p' , 0 , 11 , '일출' , 0 , ['[황야의 무법자] 사용 시 보이는 모든 적을 1.5초 동안 35% 감속시킵니다.'] , 64 , 4096);
+            padd('p' , 0 , 12 , '한량' , 0 , ['[황야의 무법자] 사용 중 추가 생명력을 100(기술위력)얻고 이동 속도가 25% 증가합니다.'] , 64 , 256+32);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+           
+            padd('w' , 'r' , 8 , '빠른 장전 약실' , 4000 , ['재장전 속도 +40%', '적으로부터 6미터 이내 거리에서 재장전할 경우, 최대 탄약의 20%만큼을 추가 탄약으로 얻습니다.'] , 128 , 128+2048);
+
+            padd('w' , 's' , 12 , '경쟁 분석' , 11000 , ['무기 생명력 흡수 +20%', '공격 역할 적에게 주는 기본 발사 피해가 15% 증가합니다.'] , 128 , 512+4096);
+            
+            padd('t' , 'r' , 8 , '블랙워치 기술' , 4000 , ['기술 위력 +10%', '[황야의 무법자]로 적을 처치하면 해당 라운드에서 [섬광탄] 최대 재사용 대기시간이 10% 감소합니다(최대 40%).'] , 64+32 , 2+64);
+            padd('t' , 'r' , 9 , '간소화된 판초' , 5000 , ['재사용 대기시간 감소 +10%', '[구르기] 사용 시 [섬광탄] 재사용 대기시간이 2초 감소합니다.'] , 16+32 , 64);
+            
+            padd('t' , 's' , 11 , '급조 다이너마이트' , 11000 , ['기술 위력 +20%', '재사용 대기시간 감소 +10%', '[섬광탄] 범위가 50% 증가합니다.'] , 32 , 2+64+4096);
+            
+            padd('s' , 'r' , 9 , '지명 수배 포스터' , 4000 , ['생명력 +25', '[황야의 무법자]로 적을 처치할 때마다 500의 스타디움 재화를 추가로 얻습니다.'] , 64 , 256+4096);
+            
+            padd('s' , 's' , 11 , '프랭키의 해결사' , 10000 , ['생명력 +50', '[구르기]를 사용해 장전한 탄약 한 발당 생명력을 10(기술위력) 치유합니다.'] , 16 , 256);
+            padd('s' , 's' , 12 , '독수리의 눈' , 12000 , ['생명력 +50', '12미터보다 멀리 있는 적에게서 받는 피해가 25% 감소합니다.'] , 128 , 256+4096);
+
+            tlc(2);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="3"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 캐서디 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+<pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>
