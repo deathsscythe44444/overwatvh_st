@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>주노</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '메디마스터' , 0 , ['[메디블라스터]가 아군과 적군 모두에게 치명타로 적중합니다.'] , 1 , 4096);
+            padd('p' , 0 , 2 , '바늘 쏘기' , 0 , ['[메디블라스터]가 1초에 걸쳐 적에게 10(기술위력)의 피해를 줍니다(중첩되지 않음).'] , 1 , 4096);
+            padd('p' , 0 , 3 , '우주적 냉각제' , 0 , ['[펄사 어뢰] 재사용 대기시간이 명중한 대상 하나당 0.5초 감소합니다.'] , 2 , 64);
+            padd('p' , 0 , 4 , '의료용 미사일' , 0 , ['[펄사 어뢰]가 30(기술위력)의 생명력을 추가로 치유하고, 적중한 아군이 받는 치유량이 3초동안 50% 증가합니다.'] , 2 , 256);
+            padd('p' , 0 , 5 , '펄사 플러스' , 0 , ['[펄사 어뢰] 충전 횟수가 1 증가합니다.'] , 2 , 4096);
+            padd('p' , 0 , 6 , '어뢰 글라이드' , 0 , ['[글라이드 부스터] 사용 중 피해를 50 줄 때마다 [펄사 어뢰] 재사용 대기시간이 1초씩 감소합니다.'] , 16+2 , 64);
+            padd('p' , 0 , 7 , '점멸 부스터' , 0 , ['[글라이드 부스터] 충전 횟수가 2 증가하고 재사용 대기시간이 65% 감소하지만, 지속 시간이 75% 감소합니다.'] , 16 , 64+4096);
+            padd('p' , 0 , 8 , '블랙홀' , 0 , ['[하이퍼 링]이 링을 통과하는 적의 이동 속도를 1초 동안 35% 감소시킵니다.'] , 32 , 4096);
+            padd('p' , 0 , 9 , '집결의 고리' , 0 , ['아군이 [하이퍼 링]을 지나면 재사용 대기 시간이 1초 감소합니다.'] , 32 , 64);
+            padd('p' , 0 , 10 , '하이퍼 치유사' , 0 , ['[하이퍼 링]의 영향을 받는 아군이 50(기술위력)의 추가 생명력을 얻습니다.'] , 32 , 256);
+            padd('p' , 0 , 11 , '궤도 정렬' , 0 , ['[궤도 광선] 안에 있는 적의 이동 속도가 35% 감소합니다. 내부 아군의 이동 속도는 25% 증가합니다.'] , 64 , 32+4096);
+            padd('p' , 0 , 12 , '별의 집중' , 0 , ['[궤도 광선]이 내 위치를 따라다니며, 지속 시간이 35% 증가합니다.'] , 64 , 4096);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+            padd('w' , 'r' , 8 , '득점 사격' , 4000 , ['5% 무기 공격력', '공중에 떠 있을 때 [메디블라스터] 피해가 15% 증가합니다.'] , 1 , 1+4096);
+            
+            padd('w' , 's' , 12 , '펄스 쐐기' , 11000 , ['공격 속도 +10%', '[펄사 어뢰] 투사체 속도 +35%', '[펄사 어뢰] 사용 후 공격 속도가 4초 동안 25% 증가합니다.'] , 2 , 16+4096);
+            padd('w' , 's' , 13 , '장거리 블라스터' , 12000 , ['무기 공격력 +15%', '[메디블라스터]가 12미터 보다 멀리 떨어져 있는 대상에게 주는 피해와 치유량이 15% 증가합니다.'] , 1 , 1+4096);
+            padd('w' , 's' , 14 , '중력 척력' , 10000 , ['무기 공격력 +15%', '[글라이드 부스터] 사용 중 공격 속도가 20% 증가하고 [빠른 근접 공격]이 적을 밀쳐냅니다.'] , 16 , 1+16+4096);
+            
+            padd('t' , 'r' , 8 , '대상 고정 보호막' , 4000 , ['기술 위력 +10%', '[펄사 어뢰] 조준 중 최대 보호막의 50%에 해당하는 추가 생명력을 얻습니다.'] , 2 , 2+256);
+            padd('t' , 'r' , 9 , '빛의 고리' , 4000 , ['기술 위력 +10%', '[하이퍼 링] 지속 시간 +25%'] , 32 , 2+4096);
+            
+            padd('t' , 's' , 11 , '펄스타 파괴자' , 10000 , ['기술 생명력 흡수 +10%', '[펄사 어뢰]가 적중 시 폭발하여 20(기술위력)의 피해를 줍니다.'] , 2 , 1024+4096);
+            padd('t' , 's' , 12 , '태양 차폐' , 10000 , ['기술 위력 +15%', '[하이퍼 링]의 영향을 받는 아군이 1초마다 25의 보호막을 회복합니다.'] , 32 , 2+256);
+            padd('t' , 's' , 13 , '붉은 약속 제어기' , 10000 , ['보호막 +50', '기술 위력 +15%', '[궤도 광선] 사용 시, 자신의 재사용 대기시간을 초기화합니다.'] , 64 , 256+2+64);
+            
+            padd('s' , 'r' , 9 , '부스터 로켓' , 4000 , ['보호막 +25', '[글라이드 부스터] 지속 시간 +25%'] , 16 , 256+4096);
+            
+            padd('s' , 's' , 11 , '강화 활공' , 10000 , ['보호막 +75', '[글라이드 부스터] 사용 중 10%의 피해 감소를 얻습니다.'] , 16 , 256+4096);
+            padd('s' , 's' , 12 , '태양 폭발 혈청' , 10000 , ['보호막 +75', '[궤도 광선] 치유량이 25% 증가합니다.'] , 64 , 256+4096);
+
+            tlc(3);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="3"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 주노 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+
+            <tr><td id="pa"><img id="pa" src="./img/Cp.png"></td>
+                <td>
+                    <pre id="dp">
+공중에서 스페이스 바 키를 누르면 2단 점프를 하고, 
+스페이스 바 키를 길게 누르면 천천히 하강합니다.
+2단 점프 높이: 4.5m, 하강 속도: 3m/s
+                    </pre>
+                </td></tr>
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>

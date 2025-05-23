@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>아나</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '전술 소총' , 0 , ['조준경으로 조준하는 동안, [생체 소총]이 아군에게 고정되어 반드시 명중합니다.'] , 2 , 4096);
+            padd('p' , 0 , 2 , '정확한 처방' , 0 , ['[생체 소총]이 아군과 적군 모두에게 치명타로 적중합니다.'] , 1+2 , 4096);
+            padd('p' , 0 , 3 , '조준경 따위 필요 없어' , 0 , ['조준하지 않고 [생체 소총]을 적중시키면 2초 동안 공격 속도가 10% 증가합니다. (최대 3회 중첩)'] , 1 , 16);
+            padd('p' , 0 , 4 , '몽롱함' , 0 , ['[수면총]을 아군에게 맞혀 잠재우는 대신 8초에 걸쳐 아군 최대 생명력의 100%만큼 치유합니다.'] , 16 , 256);
+            padd('p' , 0 , 5 , '수면 요법' , 0 , ['생명력을 50 얻습니다. 적에게 수면을 적중하면 생명력을 10 얻습니다. (최대 150)'] , 16 , 256);
+            padd('p' , 0 , 6 , '안락한 구름' , 0 , ['[수면총]이 닿으면 폭발하여 3m 이내의 대상을 공격하지만, 수면 지속 시간이 50% 감소합니다.'] , 16 , 4096);
+            padd('p' , 0 , 7 , '가정 치료' , 0 , ['[생체 수류탄]이 치유량의 100%에 해당하는 추가 생명력을 부여합니다.'] , 32 , 256);
+            padd('p' , 0 , 8 , '맹독성' , 0 , ['[생체 수류탄]이 지속 시간 동안 수류탄의 영향을 받는 적에게 30(기술위력)의 추가 피해를 줍니다.'] , 32 , 4096);
+            padd('p' , 0 , 9 , '시간 초과' , 0 , ['[생체 수류탄]이 적을 밀쳐내고 적의 이동 속도를 1.5초 동안 50% 감소시킵니다.'] , 32 , 4096);
+            padd('p' , 0 , 10 , '내 차례' , 0 , ['[나노 강화제]를 지속 시간의 50%만큼 자신에게도 적용합니다.'] , 64 , 4096);
+            padd('p' , 0 , 11 , '완전한 잠재력' , 0 , ['[나노 강화제]가 대상에게 20%의 궁극기 충전과 200(기술위력)의 추가 생명력도 부여합니다.'] , 64 , 4096+256);
+            padd('p' , 0 , 12 , '우리 차례' , 0 , ['[나노 강화제]가 시야 내 다른 아군에게도 영향을 주지만, 해당 아군에게는 지속 시간이 50% 감소합니다.'] , 64 , 4096);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+            padd('w' , 'r' , 8 , '대상 추적기' , 4000 , ['생체 수류탄 지속 시간 +15%', '[생체 수류탄]에 영향을 받는 적 또는 아군 하나당 공격 속도가 5% 증가합니다. (최대 25%)'] , 32 , 4096+16);
+            padd('w' , 'r' , 9 , '강력한 투사체' , 5000 , ['무기 공격력 +10%', '조준하지 않은 [생체 소총] 투사체 크기가 100% 증가합니다.'] , 1 , 1+4096);
+            padd('w' , 'r' , 10 , '빠른 조준' , 5000 , ['무기 공격력 +5%', '조준경 조준 속도 +200%', '공중에 떠 있는 적에게 주는 피해가 20% 증가합니다.'] , 2 , 1+4096);
+            
+            padd('w' , 's' , 12 , '소총 자원' , 11000 , ['최대 탄약 +4', '조준하지 않고 [생체 소총]을 발사하면 50% 확률로 탄약을 소모하지 않습니다.'] , 1 , 2048);
+            
+            padd('t' , 'r' , 8 , '복용량 2배' , 4000 , ['생명력 +25', '[생체 수류탄]의 영향을 받는 적에게 [수면총]을 적중시키면 수면총 재사용 대기시간이 35% 감소합니다.'] , 16+32 , 256+64);
+
+            padd('t' , 's' , 11 , '치사량' , 9000 , ['기술 생명력 흡수 +50%', '[수면총]을 명중시키면 100(기술위력)의 추가 피해를 줍니다.'] , 16 , 1024+4096);
+            padd('t' , 's' , 12 , '진정제' , 10000 , ['수면총이 다음을 얻습니다.','충돌 범위 +50%, 투사체 속도 +100%, 수면 지속 시간 +20%'] , 16 , 4096);
+            padd('t' , 's' , 13 , '클러스터 코어' , 10000 , ['기술 생명력 흡수 +25%', '[생체 수류탄] 재사용 대기시간이 명중한 대상 하나당 1초 감소합니다.'] , 32 , 1024+64);
+            padd('t' , 's' , 14 , '수류탄 핀' , 12000 , ['기술 위력 +20%', '[생체 수류탄] 반경 +30%'] , 32 , 2+4096);
+            
+            padd('s' , 'r' , 9 , '완벽해진 공식' , 4000 , ['보호막 +25', '[나노 강화제] 지속 시간 +15%'] , 64 , 256+4096);
+            padd('s' , 'r' , 10 , '질주 부츠' , 4000 , ['이동 속도 +5%, 공중에서 점프하면 짧은 거리를 질주합니다.'] , 128 , 32+4096);
+            padd('s' , 'r' , 11 , '수액 방울' , 4000 , ['생명력 +25', '[생체 수류탄]의 효과가 적용된 상태에서 아나가 100(기술위력)의 추가 생명력을 얻습니다.'] , 32 , 256);
+            
+            padd('s' , 's' , 11 , '호루스의 눈' , 10000 , ['보호막 +50', '[나노 강화제]가 벽 저편의 아군을 대상으로 지정할 수 있으며, 사거리가 60m로 증가합니다.'] , 64 , 4096);
+            tlc(2);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="3"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 아나 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>

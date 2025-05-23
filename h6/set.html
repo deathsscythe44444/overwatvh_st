@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>키리코</title>
+        <link rel="stylesheet" href="../style.css">
+        <script src="../total.js"></script>
+        <script>
+            reset();
+            //padd('p' , 0 , 1 , '' , 0 , [''] ,  , );
+            padd('p' , 0 , 1 , '3단 변신' , 0 , ['[순보] 사용 후 4초 동안 보조 발사 시 2개의 [쿠나이]를 추가로 흩뿌려 던집니다. 해당 쿠나이로 주는 피해가 50% 감소합니다.'] , 16+2 , 4096);
+            padd('p' , 0 , 2 , '여우 폭죽' , 0 , ['재장전 후 다음으로 던지는 [쿠나이] 3개가 닿으면 폭발하여 주위 적에게 20(무기공격력)의 피해를 줍니다.'] , 2 , 4096);
+            padd('p' , 0 , 3 , '예리한 쿠나이' , 0 , ['[쿠나이] 치명타 적중 시 진행 중인 기술 재사용 대기시간이 15% 감소하고, 탄약을 3발 돌려받습니다.'] , 2 , 64+2048);
+            padd('p' , 0 , 4 , '바람에 실린 나뭇잎' , 0 , ['[치유의 부적]이 다른 아군 한 명에게 최대 2번 튕겨, 원래 치유량의 30%만큼 치유합니다.'] , 1 , 256);
+            padd('p' , 0 , 5 , '자가관리' , 0 , ['[치유의 부적] 사용 시 최대 생명력의 5%만큼 스스로를 치유합니다.'] , 1 , 256);
+            padd('p' , 0 , 6 , '지원 사격' , 0 , ['[치유의 부적]이 아군을 치유하면 아군의 공격 속도가 3초 동안 20% 증가합니다.'] , 1 , 16);
+            padd('p' , 0 , 7 , '분신술' , 0 , ['[순보] 사용 후 5초 동안 유지되는 분신을 생성합니다.'] , 16 , 4096);
+            padd('p' , 0 , 8 , '재빠른 발' , 0 , ['[순보]를 대상 없이 방향을 지정해 사용할 수 있습니다.'] , 16 , 4096);
+            padd('p' , 0 , 9 , '쌍방울' , 0 , ['[정화의 방울] 충전 횟수가 1 증가합니다.'] , 32 , 4096);
+            padd('p' , 0 , 10 , '정화 충전' , 0 , ['[정화의 방울]로 부정적인 효과를 정화하면, 정화한 영웅 하나당 5%의 궁극기 충전을 얻습니다.'] , 32 , 4096);
+            padd('p' , 0 , 11 , '영혼 베일' , 0 , ['[여우길] 사용 시 키리코에게서 부정적인 효과가 제거되며, 키리코가 4초 동안 무적이 됩니다.'] , 64 , 4096);
+            padd('p' , 0 , 12 , '횡단보도 안전요원' , 0 , ['[여우길]이 적의 이동 속도도 2초 동안 50% 감소시킵니다.'] , 64 , 4096);
+            /*
+            padd('w' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('w' , 's' , 12 , '' , 0 , [''] ,  , );
+            padd('t' , 'r' , 8 , '' , 0 , [''] ,  , );
+            padd('t' , 's' , 11 , '' , 0 , [''] ,  , );
+            padd('s' , 'r' , 9 , '' , 0 , [''] ,  , );
+            padd('s' , 's' , 11 , '' , 0 , [''] ,  , );
+            */
+            padd('w' , 'r' , 8 , '아사의 병기' , 4000 , ['공격 속도 +10%', '[쿠나이]가 표면에서 1번 튕깁니다.'] , 2 , 16+4096);
+            padd('w' , 'r' , 9 , '원경 집중의 띠' , 5000 , ['무기 공격력 +10%', '피해를 주면 [치유의 부적] 투사체 속도가 5초 동안 200% 증가합니다.'] , 1 , 1+4096);
+            padd('w' , 'r' , 10 , '팀워크 수단' , 5000 , ['무기 공격력 +10%', '아군을 치유하면 아군의 이동 속도가 3초 동안 10% 증가합니다.'] , 128 , 1+32);
+            
+            padd('w' , 's' , 12 , '료타의 재장전기' , 10000 , ['재장전 속도 +35%', '기술 사용 후 탄약을 100% 회복합니다.'] , 8+16+32+64 , 128+2048);
+            padd('w' , 's' , 13 , '혼령의 인도' , 10000 , ['무기 공격력 +15%', '[치유의 부적] 투사체 속도 +100%'] , 1 , 1+4096);
+            
+            padd('t' , 'r' , 8 , '요괴의 눈' , 4000 , ['기술 위력 +10%', '[여우길] 지속 시간 +35%'] , 64 , 2+4096);
+            padd('t' , 'r' , 9 , '자전거 장갑' , 5000 , ['기술 사용 시 공격 속도가 3초 동안 20% 증가합니다.'] , 8+16+32+64 , 16);
+            
+            padd('t' , 's' , 11 , '도넛 배달' , 10000 , ['기술 위력 +10%', '[순보]가 주위 아군의 생명력을 2초에 걸쳐 80(기술위력)만큼 치유합니다.'] , 16 , 2+256);
+            padd('t' , 's' , 12 , '우리 자전거' , 10000 , ['생명력 +25, 기술 위력 +15%, [여우길]의 영향을 받는 아군이 1초마다 80(기술위력)만큼 치유됩니다.'] , 64 , 256+2);
+            padd('t' , 's' , 13 , '속도의 부적' , 10000 , ['기술 위력 +15%', '[정화의 방울]이 4초 동안 공격 속도를 25%, 이동 속도를 25% 부여합니다.'] , 32 , 2+16+32);
+            
+            padd('s' , 'r' , 9 , '여우 발차기' , 4000 , ['이동 속도 +10%', '[2단 점프]를 할 수 있게 됩니다.'] , 256 , 32+4096);
+
+            padd('s' , 's' , 11 , '여신의 오라' , 10000 , ['생명력 +25', '[순보] 사용 후 4초 동안 100(기술위력)의 추가 생명력을 얻습니다.'] , 16 , 256);
+            padd('s' , 's' , 12 , '생명의 부적' , 11000 , ['기술 위력 +20%, [정화의 방울]이 5초 동안 100(기술위력)의 추가 생명력을 부여합니다.'] , 32 , 256+2);
+
+            tlc(2);//0:보조발사 없음,1:보조발사 있음(판정x),2:보조발사 있음(무기 판정) ,3:보조발사 있음(기술 판정) 
+        </script>
+        <a href="../index.html" title="home" id="up">
+            <div id ="log">
+                <img id ="ovlo" src="../img/over.png" href="">
+                <img id ="ovna" src="../img/log.png" href="">
+            </div>
+        </a>
+        <hr>
+        <table>
+            <tr>
+                <td id="cp" rowspan="3"><img id="cp" src="./img/C.png"></td>
+                <td id="cname" colspan="2"> 키리코 </td>
+            </tr>
+            <!--
+            <tr><td id="pa"><img id="pa" src="../img/dp.png"></td><td>
+                <pre id="dp">
+받는 밀쳐내기 효과가 줄어듭니다.(-25%)
+자신을 대상으로 한 공격과 치유가 궁극기를 보다 적게 충전시킵니다.(-40%)
+치명타 피해 감소(-25%)
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/ap.png"></td><td>
+                <pre id="dp">
+적에게 피해를 주면 일시적으로 대상이 받는 치유량을 감소시킵니다.(25%)
+돌격 영웅을 상대로는 효과가 반으로 줄어듭니다.(12.5%)
+지속 시간: 3초
+                </pre>
+                </td></tr>
+            
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+            -->
+            <tr><td id="pa"><img id="pa" src="../img/hp.png"></td><td>
+                <pre id="dp">
+생명력 재생을 더 빨리 시작합니다.
+발동 대기시간: 피해를 입지 않은 상태에서 2.5초 
+치유량: 초당 10 + 최대 생명력의 5%  
+                </pre>
+                </td></tr>
+
+            <tr><td id="pa"><img id="pa" src="./img/Cp.png"></td>
+                <td>
+                    <pre id="dp">
+벽을 향해 뛰어오르면 벽을 타고 오릅니다.
+이동 속도 증가: 50%, 지속 시간: 최대 1초
+                    </pre>
+                </td></tr>
+        </table>
+    </head>
+    <body>
+
+        <a href="#up" ><img id="top" src="../img/top.png"></a>
+        <details id="ts" style="cursor:pointer;">
+            <summary>무기고 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="taif a15" onclick="abo(15)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="taif a1" onclick="abo(1)">파워</td>
+                        <td class="taif a2" onclick="abo(2)">무기</td>
+                        <td class="taif a3" onclick="abo(4)">기술</td>
+                        <td class="taif a4" onclick="abo(8)">생존</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>조건 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tcif c511" onclick="cbo(511)" colspan="7" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tcif c1 " onclick="cbo(1)">기본발사<hr>좌클릭</td>
+                        <td class="tcif c2 " onclick="cbo(2)">보조발사<hr>우클릭</td>
+                        <td class="tcif c5 " onclick="cbo(16)">기술1<hr>shift</td>
+                        <td class="tcif c6 " onclick="cbo(32)">기술2<hr>e</td>
+                        <td class="tcif c7 " onclick="cbo(64)">궁극기<hr>q</td>
+                        <td class="tcif c8 " onclick="cbo(128)">특수</td>
+                        <td class="tcif c9 " onclick="cbo(256)">상시</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+         <details id="ts" style="cursor:pointer;">
+            <summary>수치 상승 분류</summary>
+            <div>
+                <table id="tsd">
+                    <tr >
+                        <td class="tsif s8191" onclick="sbo(8191)" colspan="4" >
+                            전체 적용/해제
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s1 " onclick="sbo(1)">무기공격력</td>
+                        <td class="tsif s2 " onclick="sbo(2)">기술위력</td>
+                        <td class="tsif s3 " onclick="sbo(4)">근접공격력</td>
+                        <td class="tsif s4 " onclick="sbo(8)">치명타피해</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s5 " onclick="sbo(16)">공격속도</td>
+                        <td class="tsif s6 " onclick="sbo(32)">이동속도</td>
+                        <td class="tsif s7 " onclick="sbo(64)">재사용시간감소</td>
+                        <td class="tsif s8 " onclick="sbo(128)">재장전속도</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s9 " onclick="sbo(256)">생명력</td>
+                        <td class="tsif s10 " onclick="sbo(512)">무기생명력흡수</td>
+                        <td class="tsif s11 " onclick="sbo(1024)">기술생명력흡수</td>
+                    </tr>
+                    <tr>
+                        <td class="tsif s12 " onclick="sbo(2048)">탄약</td>
+                        <td class="tsif s13 " onclick="sbo(4096)">특수</td>
+                    </tr>
+                </table>
+            </div>
+         </details>
+        <script>
+            show();
+
+        </script>
+    </body>
+</html>
